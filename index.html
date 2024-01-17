@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title id="pageTitle">Cloud Recap 2023</title>
+        <link rel="stylesheet" href="css/style.css">
+        <link rel="icon" type="image/png" href="https://www.freeiconspng.com/uploads/dashboard-icon-16.png"/>
+    </head>
+    <body>
+        <div id="text" data-text="Sua retrospectiva Cloud 2023">Sua retrospectiva Cloud 2024</div>
+        <script type="text/javascript">
+            var text = document.getElementById('text')
+            var shadow = '';
+            for(var i = 0; i < 30; i++)
+            {
+                shadow +=(shadow? ',':'')+ -i*1+'px '+ i*1+'px 0 #d9d9d9';
+            }
+            text.style.textShadow = shadow;
+        </script>
+        <div class="card c4">
+            <div class="imgBx">
+                <img id="i1" src="assets/issue.jpeg">
+            </div>
+            <div class="content">
+                <h3>Issues</h3>
+                <p id="t4">Não tenha vergonha de perguntar, mas se você não tem dúvidas que tal ajudar quem tem.</p>
+            </div>
+        </div>
+        <div class="card c1">
+            <div class="imgBx">
+                <img src="assets/commit.jpeg">
+            </div>
+            <div class="content">
+                <h3>Commits</h3>
+                <p id="t1">Sentimos sua falta! Mas nunca é tarde para começar!</p>
+            </div>
+        </div>
+        <div class="card c2">
+            <div class="imgBx">
+                <img src="assets/guild.jpeg">
+            </div>
+            <div class="content">
+                <h3>Guilda</h3>
+                <p id="t2">Você não sabe o que perdeu! Sua sorte é que ficou tudo gravado.</p>
+            </div>
+        </div>
+        <div class="card c3">
+            <div class="imgBx">
+                <img src="assets/brave.png">
+            </div>
+            <div class="content">
+                <h3>Brave</h3>
+                <p id="t3">Quando começar a usar, não vai mais querem parar.</p>
+            </div>
+        </div>
+        <div class="card c5">
+            <div class="imgBx">
+                <img src="assets/stamp.png">
+            </div>
+            <div class="content">
+                <h3>Selo</h3>
+                <p id="t5">Sempre é tempo para melhorar!</p>
+            </div>
+        </div>
+        <div class="card c6" onclick="cloud()">
+            <div class="imgBx">
+                <img id="selector" src="assets/cloud.png">
+            </div>
+            <div id="selectorText" class="content">
+                <h3>Cloud</h3>
+                <p>Clique para ver como foi o ano da Cloud</p>
+            </div>
+        </div>
+    </body>
+</html>
+<script src="js/actions.js"></script>
+<script>getDataFromAPI(0)</script>
