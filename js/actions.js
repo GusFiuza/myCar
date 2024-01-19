@@ -6,9 +6,12 @@ function getDataFromAPI() {
         if (requestHTTP.readyState === 4 & requestHTTP.status === 200) {
             let APIData = JSON.parse(requestHTTP.responseText)
             if (APIData.length != 0) {
-                document.getElementById("l1").textContent = APIData[0].brand
-                document.getElementById("l2").textContent = APIData[0].model
-                document.getElementById("l3").textContent = APIData[0].version
+                for (i = 0; i < 3; i++) {
+                    document.getElementById("l2").textContent = "Data: " + APIData[i].Date
+                    document.getElementById("l3").textContent = "Odômetro: " + APIData[i].Odometer
+                    document.getElementById("l4").textContent = "Valor do litro: " + APIData[i].Price
+                    document.getElementById("l5").textContent = APIData[i].Liters.toFixed(2) + " litros"
+                }
             } else {
                 document.head.title = "Fulano de Tal";
             }
