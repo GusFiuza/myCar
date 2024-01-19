@@ -6,7 +6,9 @@ function getDataFromAPI() {
         if (requestHTTP.readyState === 4 & requestHTTP.status === 200) {
             let APIData = JSON.parse(requestHTTP.responseText)
             if (APIData.length != 0) {
-                document.body.children[0].textContent = APIData[0].model
+                document.getElementById("l1").textContent = APIData[0].brand
+                document.getElementById("l2").textContent = APIData[0].model
+                document.getElementById("l3").textContent = APIData[0].version
             } else {
                 document.head.title = "Fulano de Tal";
             }

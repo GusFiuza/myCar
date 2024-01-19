@@ -17,9 +17,12 @@ body
 }
 .card
 {
-    width: 150px;
-    height: 150px;
+    width: 80vw;
+    height: 30vh;
     background: white;
-    border-radius: 5px;
+    border-radius: 45px;
     text-wrap: wrap;
+    padding: 30px;
+    font-size: 6rem;
+    font-weight: bolder;
 }
