@@ -6,11 +6,14 @@ function getDataFromAPI() {
         if (requestHTTP.readyState === 4 & requestHTTP.status === 200) {
             let APIData = JSON.parse(requestHTTP.responseText)
             if (APIData.length != 0) {
-                for (i = 0; i < 3; i++) {
+                for (i = 0; i < APIData.length; i++) {
                     document.getElementById("l2").textContent = "Data: " + APIData[i].Date
-                    document.getElementById("l3").textContent = "Odômetro: " + APIData[i].Odometer
-                    document.getElementById("l4").textContent = "Valor do litro: " + APIData[i].Price
-                    document.getElementById("l5").textContent = APIData[i].Liters.toFixed(2) + " litros"
+                    document.getElementById("l3").textContent = "Odômetro: " + APIData[i].Odometer.toLocaleString('pt-BR', { style: 'decimal' })
+                    document.getElementById("l4").textContent = "Valor do litro: " + APIData[i].Price.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })
+                    document.getElementById("l5").textContent = APIData[i].Liters.toFixed(2).toLocaleString().replace('.', ',') + " litros"
+                    if (i > 0) {
+                        document.getElementById("l6").textContent = "Consumo: " + ((APIData[i].Odometer-APIData[i-1].Odometer)/APIData[i].Liters).toFixed(2) + " km/l"
+                    }
                 }
             } else {
                 document.head.title = "Fulano de Tal";
