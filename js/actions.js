@@ -12,7 +12,32 @@ function getDataFromAPI() {
                     document.getElementById("l4").textContent = "Valor do litro: " + APIData[i].Price.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })
                     document.getElementById("l5").textContent = APIData[i].Liters.toFixed(2).toLocaleString().replace('.', ',') + " litros"
                     if (i > 0) {
+                        day = parseInt(APIData[i-1].Date.substring(0,2)) + 1
+                        if (day < 10) {
+                            day = '0' + day.toString()
+                        } else {
+                            day = day.toString()
+                        }
+                        month = APIData[i-1].Date.substring(3,5)
+                        year = APIData[i-1].Date.substring(6,10)
+                        dateOne = new Date(year + '-' + month + '-' + day)
+
+                        day = parseInt(APIData[i].Date.substring(0,2)) + 1
+                        if (day < 10) {
+                            day = '0' + day.toString()
+                        } else {
+                            day = day.toString()
+                        }
+                        month = APIData[i].Date.substring(3,5)
+                        year = APIData[i].Date.substring(6,10)
+                        dateTwo = new Date(year + '-' + month + '-' + day)
+                        
+                        timeDiff = Math.abs(dateTwo.getTime() - dateOne.getTime());
+                        diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
+                        
                         document.getElementById("l6").textContent = "Consumo: " + ((APIData[i].Odometer-APIData[i-1].Odometer)/APIData[i].Liters).toFixed(2) + " km/l"
+                        document.getElementById("l7").textContent = "Média de " + ((APIData[i].Odometer-APIData[i-1].Odometer)/diffDays).toFixed() + "km por dia"
+
                     }
                 }
             } else {
