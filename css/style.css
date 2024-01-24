@@ -40,3 +40,25 @@ body
     font-size: 3rem;
     font-weight: bolder;
 }
+.button
+{
+    font-size: 8rem;
+    font-weight: bolder;
+    position: relative;
+    top: 8vw;
+    left: 32.9vh;
+}
+.buttons
+{
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    font-size: 4rem;
+    font-weight: bolder;
+    position: relative;
+    top: 7.5vw;
+}
+input{
+    font-size: 3rem;
+    width: 80vw;
+}

@@ -52,3 +52,13 @@ function getDataFromAPI() {
     }
     requestHTTP.send()
 }
+
+function editData() {
+    if ( document.getElementById('view').hidden ) {
+        document.getElementById('edit').setAttribute('hidden', '')
+        document.getElementById('view').removeAttribute('hidden')
+    } else {
+        document.getElementById('view').setAttribute('hidden', '')
+        document.getElementById('edit').removeAttribute('hidden')
+    }
+}

@@ -14,13 +14,26 @@
             <p>FIPE: 004516-0<p>
         </div>
         <div class="fuel">
-            <p id="l1">Último abastecimento<p>
-            <p id="l2">Data: <p>
-            <p id="l3">Odômetro: <p>
-            <p id="l4">Valor do litro: <p>
-            <p id="l5"> litros<p>
-            <p id="l6"> km/l<p>
-            <p id="l7"> km/dia<p>
+            <div id="view">
+                <p id="l1">Último abastecimento<p>
+                <p id="l2">Data: <p>
+                <p id="l3">Odômetro: <p>
+                <p id="l4">Valor do litro: <p>
+                <p id="l5"> litros<p>
+                <p id="l6"> km/l<p>
+                <p id="l7"> km/dia<p>
+                <p class="button" onclick="editData()">+</p>
+            </div>
+            <div id="edit" hidden>
+                <label>Data:</label><input type="text" value="24/01/2024">
+                <label>Odômetro:</label><input type="text" value="20.200">
+                <label>Valor do litro:</label><input type="text" value="3,59">
+                <label>Litros:</label><input type="text" value="">
+                <div class="buttons">
+                    <p class="confirm" onclick="editData()">Confirmar</p>
+                    <p class="cancel" onclick="editData()">Cancelar</p>
+                </div>
+            </div>
         </div>
     </body>
 </html>
