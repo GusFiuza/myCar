@@ -37,17 +37,24 @@ body
     text-wrap: wrap;
     margin: 30px;
     padding: 30px;
+}
+.view
+{
     font-size: 3rem;
+    font-weight: bolder;
+}
+.edit
+{
+    font-size: 2rem;
     font-weight: bolder;
 }
 .button
 {
-    font-size: 8rem;
+    font-size: 7rem;
     font-weight: bolder;
     position: absolute;
-    color: blue;
-    top: 145vw;
-    left: 30vh;
+    top: 144vw;
+    left: 43vh;
 }
 .buttons
 {
@@ -57,9 +64,9 @@ body
     font-size: 4rem;
     font-weight: bolder;
     position: relative;
-    top: 7.5vw;
+    top: 2vw;
 }
 input{
-    font-size: 3rem;
+    font-size: 2.5rem;
     width: 80vw;
 }
