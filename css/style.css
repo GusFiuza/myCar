@@ -44,9 +44,10 @@ body
 {
     font-size: 8rem;
     font-weight: bolder;
-    position: relative;
-    top: -12vw;
-    left: 32.9vh;
+    position: absolute;
+    color: blue;
+    top: 145vw;
+    left: 38vh;
 }
 .buttons
 {
