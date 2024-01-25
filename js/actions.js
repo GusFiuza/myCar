@@ -60,5 +60,13 @@ function editData() {
     } else {
         document.getElementById('view').setAttribute('hidden', '')
         document.getElementById('edit').removeAttribute('hidden')
+        today = new Date()
+        document.getElementById('edit').children[1].value = today.toLocaleDateString("pt-BR")
     }
+}
+
+function testing() {
+    today = new Date()
+    document.getElementById('edit').children[1].value = today.toLocaleDateString("pt-BR")
+    console.log(document.getElementById('edit').children[1].value)
 }
