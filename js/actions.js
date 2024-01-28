@@ -1,10 +1,12 @@
+let APIData
+let requestHTTP = new XMLHttpRequest()
+let link = `https://6588253990fa4d3dabf982d3.mockapi.io/onix`
+
 function getDataFromAPI() {
-    let requestHTTP = new XMLHttpRequest()
-    let link = `https://6588253990fa4d3dabf982d3.mockapi.io/onix`
     requestHTTP.open('GET', link, true)
     requestHTTP.onload = function (e) {
         if (requestHTTP.readyState === 4 & requestHTTP.status === 200) {
-            let APIData = JSON.parse(requestHTTP.responseText)
+            APIData = JSON.parse(requestHTTP.responseText)
             if (APIData.length != 0) {
                 for (i = 0; i < APIData.length; i++) {
                     document.getElementById("l2").textContent = "Data: " + APIData[i].Date
@@ -37,7 +39,6 @@ function getDataFromAPI() {
                         
                         document.getElementById("l6").textContent = "Consumo: " + ((APIData[i].Odometer-APIData[i-1].Odometer)/APIData[i].Liters).toFixed(2) + " km/l"
                         document.getElementById("l7").textContent = "Média de " + ((APIData[i].Odometer-APIData[i-1].Odometer)/diffDays).toFixed() + "km por dia"
-
                     }
                 }
             } else {
@@ -62,11 +63,28 @@ function editData() {
         document.getElementById('edit').removeAttribute('hidden')
         today = new Date()
         document.getElementById('edit').children[1].value = today.toLocaleDateString("pt-BR")
+        document.getElementById('edit').children[3].value = APIData[APIData.length-1].Odometer.toLocaleString('pt-BR', { style: 'decimal' })
+        document.getElementById('edit').children[5].value = APIData[APIData.length-1].Price.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })
+    }
+}
+
+function confirmData() {
+    requestHTTP.open('POST', link, false)
+    requestHTTP.send()
+
+    // requestHTTP.open('PUT', link+"/4", false)
+    // requestHTTP.send(JSON.parse('{"Date": "27/01/2024","Odometer": 20200,"Price": 3.59,"Liters": 12.345}'))
+
+    // requestHTTP.open('DELETE', link+"/4", false)
+    // requestHTTP.send()
+
+    if (requestHTTP.responseText != "") {
+        console.log(requestHTTP.status)
+    } else {
+        console.log(requestHTTP.status)
     }
 }
 
 function testing() {
-    today = new Date()
-    document.getElementById('edit').children[1].value = today.toLocaleDateString("pt-BR")
-    console.log(document.getElementById('edit').children[1].value)
+    // console.log(APIData[APIData.length-1].Odometer)
 }
