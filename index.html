@@ -15,21 +15,24 @@
         </div>
         <div class="fuel">
             <div id="view" class="view">
-                <p id="l1">Último abastecimento<p>
+                <p id="l1"><p>
                 <p id="l2"><p>
                 <p id="l3"><p>
                 <p id="l4"><p>
                 <p id="l5"><p>
                 <p id="l6"> km/l<p>
-                <p id="l7"> km/dia<p>
-                <p class="button" onclick="editData()">+</p>
+                <div class="viewButtons">
+                    <p onclick="previousData()"><</p>
+                    <p onclick="editData()">+</p>
+                    <p onclick="nextData()">></p>
+                </div>
             </div>
             <div id="edit" class="edit" hidden>
                 <label>Data:</label><input type="text" value="">
                 <label>Odômetro:</label><input type="text" value="">
                 <label>Valor do litro:</label><input type="text" value="">
                 <label>Litros:</label><input type="text" value="">
-                <div class="buttons">
+                <div class="editButtons">
                     <p class="confirm" onclick="confirmData()">Confirmar</p>
                     <p class="cancel" onclick="editData()">Cancelar</p>
                 </div>
