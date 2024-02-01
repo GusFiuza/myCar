@@ -3,6 +3,24 @@ let currentPosition
 let requestHTTP = new XMLHttpRequest()
 let link = `https://6588253990fa4d3dabf982d3.mockapi.io/onix`
 
+// FIPE data
+let FIFEData
+FIPEData = JSON.parse('[ \
+                    {"month":202301,"value":99292}, \
+                    {"month":202302,"value":99212}, \
+                    {"month":202303,"value":99685}, \
+                    {"month":202304,"value":99040}, \
+                    {"month":202305,"value":99798}, \
+                    {"month":202306,"value":100430}, \
+                    {"month":202307,"value":99899}, \
+                    {"month":202308,"value":98835}, \
+                    {"month":202309,"value":98575}, \
+                    {"month":202310,"value":97692}, \
+                    {"month":202311,"value":97551}, \
+                    {"month":202312,"value":97526}, \
+                    {"month":202401,"value":96211} \
+                ]')
+
 function getDataFromAPI() {
     requestHTTP.open('GET', link, true)
     requestHTTP.onload = function (e) {
@@ -38,7 +56,7 @@ function fillView(position) {
         document.getElementById("l1").textContent = document.getElementById("l1").textContent + " (Último)"
     }
     if (position > 0) {
-        day = parseInt(APIData[position-1].Date.substring(0,2)) + 1
+        day = parseInt(APIData[position-1].Date.substring(0,2))
         if (day < 10) {
             day = '0' + day.toString()
         } else {
@@ -47,8 +65,9 @@ function fillView(position) {
         month = APIData[position-1].Date.substring(3,5)
         year = APIData[position-1].Date.substring(6,10)
         dateOne = new Date(year + '-' + month + '-' + day)
+        dateOne.setDate(dateOne.getDate() + 1)
 
-        day = parseInt(APIData[position].Date.substring(0,2)) + 1
+        day = parseInt(APIData[position].Date.substring(0,2))
         if (day < 10) {
             day = '0' + day.toString()
         } else {
@@ -57,7 +76,8 @@ function fillView(position) {
         month = APIData[position].Date.substring(3,5)
         year = APIData[position].Date.substring(6,10)
         dateTwo = new Date(year + '-' + month + '-' + day)
-        
+        dateTwo.setDate(dateTwo.getDate() + 1)
+
         timeDiff = Math.abs(dateTwo.getTime() - dateOne.getTime());
         diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
         
@@ -95,8 +115,8 @@ function nextData() {
 }
 
 function confirmData() {
-    requestHTTP.open('POST', link, false)
-    requestHTTP.send()
+    // requestHTTP.open('POST', link, false)
+    // requestHTTP.send(JSON.parse('{"Date": "27/01/2024","Odometer": 20200,"Price": 3.59,"Liters": 12.345}'))
 
     // requestHTTP.open('PUT', link+"/4", false)
     // requestHTTP.send(JSON.parse('{"Date": "27/01/2024","Odometer": 20200,"Price": 3.59,"Liters": 12.345}'))
@@ -104,13 +124,38 @@ function confirmData() {
     // requestHTTP.open('DELETE', link+"/4", false)
     // requestHTTP.send()
 
-    if (requestHTTP.responseText != "") {
-        console.log(requestHTTP.status)
-    } else {
-        console.log(requestHTTP.status)
-    }
+    // if (requestHTTP.responseText != "") {
+    //     console.log(requestHTTP.status)
+    // } else {
+    //     console.log(requestHTTP.status)
+    // }
+
+    const onixData = {
+        Date: '01/02/2024',
+        Odometer: 20200,
+        Price: 3.39,
+        Liters: 12.345
+    };
+      
+    fetch('https://6588253990fa4d3dabf982d3.mockapi.io/onix', {
+        method: 'POST',
+        headers: {'content-type':'application/json'},
+        // Send your data in the request body as JSON
+        body: JSON.stringify(onixData)
+    }).then(res => {
+            if (res.ok) {
+                console.log(res.json());
+                return res.json();
+            }
+        // handle error
+        }).then(task => {
+        // do something with the new task
+        }).catch(error => {
+        // handle error
+    })
+
 }
 
 function testing() {
-    // console.log(APIData[APIData.length-1].Odometer)
+    console.log(FIPEData[0].value)
 }
