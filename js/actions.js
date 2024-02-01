@@ -94,17 +94,12 @@ function previousData() {
 }
 
 function editData() {
-    if ( document.getElementById('view').hidden ) {
-        document.getElementById('edit').setAttribute('hidden', '')
-        document.getElementById('view').removeAttribute('hidden')
-    } else {
-        document.getElementById('view').setAttribute('hidden', '')
-        document.getElementById('edit').removeAttribute('hidden')
-        today = new Date()
-        document.getElementById('edit').children[1].value = today.toLocaleDateString("pt-BR")
-        document.getElementById('edit').children[3].value = APIData[APIData.length-1].Odometer.toLocaleString('pt-BR', { style: 'decimal' })
-        document.getElementById('edit').children[5].value = APIData[APIData.length-1].Price.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })
-    }
+    document.getElementById('view').setAttribute('hidden', '')
+    document.getElementById('edit').removeAttribute('hidden')
+    today = new Date()
+    document.getElementById('edit').children[1].value = today.toLocaleDateString("pt-BR")
+    document.getElementById('edit').children[3].value = APIData[APIData.length-1].Odometer.toLocaleString('pt-BR', { style: 'decimal' })
+    document.getElementById('edit').children[5].value = APIData[APIData.length-1].Price.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })
 }
 
 function nextData() {
@@ -115,26 +110,11 @@ function nextData() {
 }
 
 function confirmData() {
-    // requestHTTP.open('POST', link, false)
-    // requestHTTP.send(JSON.parse('{"Date": "27/01/2024","Odometer": 20200,"Price": 3.59,"Liters": 12.345}'))
-
-    // requestHTTP.open('PUT', link+"/4", false)
-    // requestHTTP.send(JSON.parse('{"Date": "27/01/2024","Odometer": 20200,"Price": 3.59,"Liters": 12.345}'))
-
-    // requestHTTP.open('DELETE', link+"/4", false)
-    // requestHTTP.send()
-
-    // if (requestHTTP.responseText != "") {
-    //     console.log(requestHTTP.status)
-    // } else {
-    //     console.log(requestHTTP.status)
-    // }
-
     const onixData = {
-        Date: '01/02/2024',
-        Odometer: 20200,
-        Price: 3.39,
-        Liters: 12.345
+        Date: `${document.getElementById('edit').children[1].value}`,
+        Odometer: parseInt(document.getElementById('edit').children[3].value.replace('.','')),
+        Price: parseFloat(document.getElementById('edit').children[5].value.replace('R$','').replace(',','.')),
+        Liters: parseFloat(document.getElementById('edit').children[7].value.replace(',','.'))
     };
       
     fetch('https://6588253990fa4d3dabf982d3.mockapi.io/onix', {
@@ -144,8 +124,7 @@ function confirmData() {
         body: JSON.stringify(onixData)
     }).then(res => {
             if (res.ok) {
-                console.log(res.json());
-                return res.json();
+                getDataFromAPI()
             }
         // handle error
         }).then(task => {
@@ -153,9 +132,15 @@ function confirmData() {
         }).catch(error => {
         // handle error
     })
+    cancelData()
 
 }
 
+function cancelData() {
+    document.getElementById('edit').setAttribute('hidden', '')
+    document.getElementById('view').removeAttribute('hidden')
+}
+
 function testing() {
-    console.log(FIPEData[0].value)
+    console.log(FIPEData[FIPEData.length-1].value.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }))
 }
