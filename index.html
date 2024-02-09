@@ -6,12 +6,11 @@
         <link rel="stylesheet" href="css/style.css">
         <link rel="icon" type="image/png" href="https://www.freeiconspng.com/uploads/chevrolet-car-front-png-32.png"/>
     </head>
-    <body onclick="testing()">
+    <body onclick="testing(1)">
         <div class="data">
-            <p>Chevrolet<p>
-            <p>Onix 1.0 Turbo Automático<p>
-            <p>Premier<p>
-            <p>FIPE: 004516-0<p>
+            <p><p>
+            <p><p>
+            <p><p>
         </div>
         <div class="fuel">
             <div id="view" class="view">
@@ -33,7 +32,7 @@
                 <label>Valor do litro:</label><input type="text" value="">
                 <label>Litros:</label><input type="text" value="">
                 <div class="editButtons">
-                    <p class="confirm" onclick="confirmData()">Confirmar</p>
+                    <p class="confirm" onclick="confirmData(1)">Confirmar</p>
                     <p class="cancel" onclick="cancelData()">Cancelar</p>
                 </div>
             </div>
@@ -41,4 +40,4 @@
     </body>
 </html>
 <script src="js/actions.js"></script>
-<script>getDataFromAPI()</script>
+<script>getDataFromAPI(1)</script>
