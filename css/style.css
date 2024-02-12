@@ -14,18 +14,18 @@ body
     width: 100vw;
     height: 100vh;
     background: black;
-    overflow: hidden;
+    overflow: auto;
 }
 .data
 {
     width: 80vw;
-    height: 20vh;
+    height: 30vh;
     background: white;
     border-radius: 45px;
     text-wrap: wrap;
     margin: 30px;
     padding: 30px;
-    font-size: 4rem;
+    font-size: 3rem;
     font-weight: bolder;
 }
 .fuel

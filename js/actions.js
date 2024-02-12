@@ -1,7 +1,7 @@
 const projectToken = '65bc2b4f52189914b5bda99c'
+let PriceData
 let FuelingData
 let currentPosition
-
 
 function testing(carId) {
     console.log(carId)
@@ -9,6 +9,7 @@ function testing(carId) {
 
 function getDataFromAPI(carId) {
     getCarData(carId)
+    getPriceData(carId)
     getFuelingData(carId)
 }
 
@@ -22,6 +23,23 @@ function getCarData(carId) {
         document.body.children[0].children[0].textContent = tasks.brand
         document.body.children[0].children[1].textContent = tasks.model
         document.body.children[0].children[2].textContent = tasks.version
+      }).catch(error => {})
+}
+
+function getPriceData(carId) {
+    fetch(`https://${projectToken}.mockapi.io/car/${carId}/price`, {
+        method: 'GET',
+        headers: {'content-type':'application/json'},
+      }).then(res => {
+        if (res.ok) {return res.json()}
+      }).then(prices => {
+        for (i = 0; i < prices.length; i++) {
+            PriceData = prices
+            // currentPosition = FuelingData.length - 1
+            if (PriceData.length != 0) {
+                document.body.children[0].children[3].textContent = "Valor FIPE em " + prices[PriceData.length-1].reference + ": " + prices[PriceData.length-1].value.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })
+            }
+        }
       }).catch(error => {})
 }
 
