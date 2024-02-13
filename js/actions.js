@@ -3,10 +3,6 @@ let PriceData
 let FuelingData
 let currentPosition
 
-function testing(carId) {
-    console.log(carId)
-}
-
 function getDataFromAPI(carId) {
     getCarData(carId)
     getPriceData(carId)
@@ -19,13 +15,15 @@ function getCarData(carId) {
         headers: {'content-type':'application/json'},
       }).then(res => {
         if (res.ok) {return res.json()}
-      }).then(tasks => {
-        document.body.children[0].children[0].textContent = tasks.brand
-        document.body.children[0].children[1].textContent = tasks.model
-        document.body.children[0].children[2].textContent = tasks.version
+      }).then(car => {
+        document.body.children[0].children[0].textContent = car.brand
+        document.body.children[0].children[1].textContent = car.model
+        document.body.children[0].children[2].textContent = car.version
       }).catch(error => {})
 }
 
+// DOTO: Improve price exhibition
+// DOTO: Add price navigation and add feature 
 function getPriceData(carId) {
     fetch(`https://${projectToken}.mockapi.io/car/${carId}/price`, {
         method: 'GET',
