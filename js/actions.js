@@ -22,8 +22,9 @@ function getCarData(carId) {
       }).catch(error => {})
 }
 
-// DOTO: Improve price exhibition
-// DOTO: Add price navigation and add feature 
+// DOTO: Add price navigation and add feature
+// DOTO: Add total value of each fueling
+// DOTO: Add tax information
 function getPriceData(carId) {
     fetch(`https://${projectToken}.mockapi.io/car/${carId}/price`, {
         method: 'GET',
@@ -35,7 +36,7 @@ function getPriceData(carId) {
             PriceData = prices
             // currentPosition = FuelingData.length - 1
             if (PriceData.length != 0) {
-                document.body.children[0].children[3].textContent = "Valor FIPE em " + prices[PriceData.length-1].reference + ": " + prices[PriceData.length-1].value.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })
+                document.body.children[0].children[3].textContent = "Valor FIPE em " + prices[PriceData.length-1].reference.toString().substring(4,6) + "/" + prices[PriceData.length-1].reference.toString().substring(0,4) + ": " + prices[PriceData.length-1].value.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })
             }
         }
       }).catch(error => {})
