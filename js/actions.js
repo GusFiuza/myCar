@@ -1,7 +1,12 @@
+// DOTO: Add price adding feature
+// DOTO: Add total value of each fueling
+// DOTO: Add tax information
+// DOTO: Create myHealth endpoint
 const projectToken = '65bc2b4f52189914b5bda99c'
 let PriceData
 let FuelingData
-let currentPosition
+let PriceCurrentPosition
+let FuelingCurrentPosition
 
 function getDataFromAPI(carId) {
     getCarData(carId)
@@ -21,10 +26,6 @@ function getCarData(carId) {
         document.body.children[0].children[2].textContent = car.version
       }).catch(error => {})
 }
-
-// DOTO: Add price navigation and add feature
-// DOTO: Add total value of each fueling
-// DOTO: Add tax information
 function getPriceData(carId) {
     fetch(`https://${projectToken}.mockapi.io/car/${carId}/price`, {
         method: 'GET',
@@ -34,9 +35,9 @@ function getPriceData(carId) {
       }).then(prices => {
         for (i = 0; i < prices.length; i++) {
             PriceData = prices
-            // currentPosition = FuelingData.length - 1
+            PriceCurrentPosition = PriceData.length - 1
             if (PriceData.length != 0) {
-                document.body.children[0].children[3].textContent = "Valor FIPE em " + prices[PriceData.length-1].reference.toString().substring(4,6) + "/" + prices[PriceData.length-1].reference.toString().substring(0,4) + ": " + prices[PriceData.length-1].value.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })
+                fillPrice(PriceCurrentPosition)
             }
         }
       }).catch(error => {})
@@ -51,12 +52,16 @@ function getFuelingData(carId) {
       }).then(tasks => {
         for (i = 0; i < tasks.length; i++) {
             FuelingData = tasks
-            currentPosition = FuelingData.length - 1
+            FuelingCurrentPosition = FuelingData.length - 1
             if (FuelingData.length != 0) {
-                fillView(currentPosition)
+                fillView(FuelingCurrentPosition)
             }
         }
       }).catch(error => {})
+}
+
+function fillPrice(position) {
+    document.body.children[0].children[3].textContent = "Valor FIPE em " + PriceData[position].reference.toString().substring(4,6) + "/" + PriceData[position].reference.toString().substring(0,4) + ": " + PriceData[position].value.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })
 }
 
 function fillView(position) {
@@ -103,10 +108,17 @@ function fillView(position) {
     }
 }
 
-function previousData() {
-    if (currentPosition > 0) {
-        currentPosition--
-        fillView(currentPosition)
+function previousData(kind) {
+    if (kind == "fueling") {
+        if (FuelingCurrentPosition > 0) {
+            FuelingCurrentPosition--
+            fillView(FuelingCurrentPosition)
+        }
+    } else {
+        if (PriceCurrentPosition > 0) {
+            PriceCurrentPosition--
+            fillPrice(PriceCurrentPosition)
+        }
     }
 }
 
@@ -119,10 +131,17 @@ function editData() {
     document.getElementById('edit').children[5].value = FuelingData[FuelingData.length-1].price.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })
 }
 
-function nextData() {
-    if (currentPosition < FuelingData.length-1) {
-        currentPosition++
-        fillView(currentPosition)
+function nextData(kind) {
+    if (kind == "fueling") {
+        if (FuelingCurrentPosition < FuelingData.length-1) {
+            FuelingCurrentPosition++
+            fillView(FuelingCurrentPosition)
+        }
+    } else {
+        if (PriceCurrentPosition < PriceData.length-1) {
+            PriceCurrentPosition++
+            fillPrice(PriceCurrentPosition)
+        }
     }
 }
 
