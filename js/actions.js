@@ -1,4 +1,5 @@
-// DOTO: Add total value of each fueling
+// DOTO: Pay technical debit
+//       - actions.js
 // DOTO: Add tax information
 // DOTO: Add price variation
 // DOTO: Add price adding feature
@@ -7,6 +8,9 @@ let PriceData
 let FuelingData
 let PriceCurrentPosition
 let FuelingCurrentPosition
+
+let allLiters = 0
+let allValue = 0
 
 function getDataFromAPI(carId) {
     getCarData(carId)
@@ -65,11 +69,13 @@ function fillPrice(position) {
 }
 
 function fillView(position) {
+    allLiters = allLiters + FuelingData[position].liters
+    allValue = allValue + (FuelingData[position].price * FuelingData[position].liters)
     document.getElementById("l1").textContent = "Data: " + FuelingData[position].date
     document.getElementById("l2").textContent = "Odômetro: " + FuelingData[position].odometer.toLocaleString('pt-BR', { style: 'decimal' })
     document.getElementById("l3").textContent = "Valor do litro: " + FuelingData[position].price.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })
-    document.getElementById("l4").textContent = FuelingData[position].liters.toFixed(2).toLocaleString().replace('.', ',') + " litros"
-    document.getElementById("l7").textContent = "Valor total: " + (FuelingData[position].price * FuelingData[position].liters).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })
+    document.getElementById("l4").textContent = FuelingData[position].liters.toFixed(2).toLocaleString().replace('.', ',') + " litros" + " (" + allLiters.toFixed(2).toLocaleString().replace('.', ',') + ")"
+    document.getElementById("l7").textContent = "Valor total: " + (FuelingData[position].price * FuelingData[position].liters).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }) + " (" + allValue.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }) + ")"
     if (position == 0) {
         document.getElementById("l1").textContent = document.getElementById("l1").textContent + " (Primeiro)"
         document.getElementById("l5").textContent = ""
